@@ -6,6 +6,11 @@
  */
 
 #include<stdio.h>
+#include<stdlib.h>
+#include"printArray.h"
+#include"ProgramHelp.h"
+#include"ShiftCipherDecryptor.h"
+#include"ImportFile.h"
 
 typedef int bool;
 #define true 1
@@ -23,15 +28,37 @@ const char startup[6][50] = {
 int main ()
 {
 	bool exit=false;
-	char choice[10];
+	char choice[10], arg1[10], arg2[10], arg3[10], cont;
 	while(exit==false){
-		get(choice);
+		system("cls");
+		printArray(startup, 6);
+		scanf("%s %s %s %s", &choice, &arg1, &arg2, &arg3);
 		if(choice=="shc"){
-
+			if(arg1=="-d"){
+				ShiftCipherDecoder();
+			}
+			else if(arg1=="-e"){
+				ShiftCipherEncoder();
+			}
+			else if(arg1=="-rotn"){
+				RotationN();
+			}
+			else{
+				printf("Correct Usage: shc -d/-e/-rotn [arguments...]\n");
+				printf("Please use 'help' for more details.\n");
+				printf("Press key to continue, or press X to quit...\n");
+				PastAction("Error. Please use 'help' for more details.");
+				cont=getchar();
+				if (cont=="x"||cont=="X"){
+					exit=true;
+				}
+			}
+		}
+		if(choice=="import"){
+			ImportFile();
 		}
 		if(choice=="help"){
-			help();
+			ProgramHelp();
 		}
 	}
 }
-
