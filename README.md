@@ -1,7 +1,7 @@
 # Cipher-Decryptor
 Information and Communications Technology School-Based Assessment Project: Cipher Decryptor
 
-https://travis-ci.org/clarissa-au/Cipher-Decryptor.svg?branch=master
+[![Build Status](https://travis-ci.org/clarissa-au/Cipher-Decryptor.svg?branch=master)](https://travis-ci.org/clarissa-au/Cipher-Decryptor)
 
 Recent Version: 0.1.0 (committing)
 
