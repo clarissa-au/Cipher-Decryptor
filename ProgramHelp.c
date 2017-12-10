@@ -1,3 +1,5 @@
+#include"TrivialTool/ClearScreen.h"
+
 typedef int bool;
 #define true 1
 #define false 0
@@ -6,7 +8,7 @@ void ProgramHelp(){
 	bool exit;
 	char cont, choice, choice2;
 	while(exit==true){
-		system("cls");
+		ClearScreen();
 		printf("Cipher-Decryptor Main Help:\n");
 		printf("Usage: [encoding] [arguments.....]\n");
 		printf("For a list of updated encodings and arguments, please consult the documentation of the Program.\n");
