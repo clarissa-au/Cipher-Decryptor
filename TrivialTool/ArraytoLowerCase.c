@@ -1,3 +1,5 @@
+#include<ctype.h>
+#include<stdio.h>
 /*
  * ArraytoLowerCase.c
  *
