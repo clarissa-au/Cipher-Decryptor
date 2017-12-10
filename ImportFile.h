@@ -8,6 +8,6 @@
 #ifndef IMPORTFILE_H_
 #define IMPORTFILE_H_
 
-void ImportFile();//??? Data link?
+void ImportFile(char filename[], char c);//??? Data link?
 
 #endif /* IMPORTFILE_H_ */

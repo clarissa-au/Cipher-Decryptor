@@ -29,11 +29,22 @@ int main ()
 {
 	bool exit=false;
 	char choice[10], arg1[10], arg2[10], arg3[10], cont;
+	char *texta;
+	char *textb;
+	char *textc;
+	char *textd;
+	char *texte;	//data link still not finished
+	char key[100];
 	while(exit==false){
 		system("cls");
 		printArray(startup, 6);
 		scanf("%s %s %s %s", &choice, &arg1, &arg2, &arg3);
+		choice=tolower("choice");
+		//arg1=tolower("arg1");
+		//arg2=tolower("arg2");
+		//arg3=tolower("arg3");
 		if(choice=="shc"){
+			arg1=tolower("arg1");
 			if(arg1=="-d"){
 				ShiftCipherDecoder();
 			}
@@ -55,10 +66,16 @@ int main ()
 			}
 		}
 		if(choice=="import"){
-			ImportFile();
+			ImportFile(arg1, arg2);
 		}
 		if(choice=="help"){
 			ProgramHelp();
 		}
 	}
+	free(texta);
+	free(textb);
+	free(textc);
+	free(textd);
+	free(texte);
+	return 0;
 }
