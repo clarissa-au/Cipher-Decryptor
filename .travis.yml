@@ -9,6 +9,10 @@ os:
    - linux
 
 compiler:
-   - gcc
+  - clang
+  - gcc
 
 script: make -k all 
+
+before-script:
+   - sudo apt-get install clang-3.n
