@@ -2,3 +2,13 @@ language: c
 
 git:
   depth: 3
+
+sudo: required
+
+ os:
+   - linux
+
+compiler:
+   - gcc
+   
+build: make -k all 
