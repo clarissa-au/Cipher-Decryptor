@@ -8,7 +8,7 @@ typedef int bool;
 
 void ProgramHelp(){
 	bool exit=true;
-	char cont, choice, choice2;
+	char cont=' ', choice, choice2;
 	while(exit==true){
 		ClearScreen();
 		printf("Cipher-Decryptor Main Help:\n");
@@ -46,7 +46,7 @@ void ProgramHelp(){
 			printf("Error Input.");
 		}
 		printf("Press key to continue searching for help, or press X to return to program...\n");
-		if (cont=="x"||cont=="X"){
+		if (cont=='x'||cont=='X'){
 			exit=false;
 		}
 	}

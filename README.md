@@ -13,7 +13,7 @@ This program solves:
 as of this version.
 
 This program supports:
-  - Plaintext input
+  - Plaintext input from files
 as of this version.
 
 This Program is under the GNU General Public License v3.0.

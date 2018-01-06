@@ -8,5 +8,6 @@
 #ifndef SHIFTCIPHERDECRYPTOR_H_
 #define SHIFTCIPHERDECRYPTOR_H_
 
+void ShiftCipherDecoder(char file[]);
 
 #endif /* SHIFTCIPHERDECRYPTOR_H_ */
