@@ -11,4 +11,4 @@ os:
 compiler:
    - gcc
 
-script: make
+script: make -k all 
