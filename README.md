@@ -5,6 +5,10 @@ Information and Communications Technology School-Based Assessment Project: Ciphe
 
 Recent Version: 0.1.0 (committing)
 
+Work till next verion:
+  - All shift cipher functions
+  - Export Functions
+
 This is the program for the Information and Communications Technology School-Based Assessment.
 
 This program solves:

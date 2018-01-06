@@ -54,15 +54,20 @@ int main ()
 	bool exit=false;
 	char cont=' ';
 
-	char key[100];
+	char key[100],c;
 
 	struct args Input;
 
 	for(int i=0; i<TEXTNUMBERS; i++){
-		Textlist[i]=false;
+		Textlist[i]=false; //true == not avaliable
 	}
 
 	while(exit==false){
+
+		for(int i=0;i<10; i++){ Input.arg0[i] = ' ';}
+		for(int i=0;i<10; i++){ Input.arg1[i] = ' ';}
+		for(int i=0;i<10; i++){ Input.arg2[i] = ' ';}
+		for(int i=0;i<10; i++){ Input.arg3[i] = ' ';}
 
 		ClearScreen();
 
@@ -73,25 +78,30 @@ int main ()
 		printf("    | As a part of the ICT SBA Project|\n");
 		printf("    +---------------------------------+\n");
 
+		printf("\n");
+		printf("\n");
 		PrintPastAction();
+		printf("\n");
+		printf("\n");
 		printTextlist();
 
 		Input = ArgsGet(); //getting args for prg
 
-		if(strncmp( Input.arg0 ,"shc", 4)==0){
-			if(strncmp( Input.arg1 ,"-d", 3)==0){
+		if(strncmp( Input.arg0 ,"shc", 3)==0){
+			//require imported files?
+			if(strncmp( Input.arg1 ,"-d", 2)==0){
 				ShiftCipherDecoder(Input.arg2);
 			}
-			else if(strncmp( Input.arg1 ,"-e", 3)==0){
+			else if(strncmp( Input.arg1 ,"-e", 2)==0){
 				ShiftCipherEncoder(Input.arg2);
 			}
-			else if(strncmp( Input.arg1 ,"-rotn", 3)==0){
+			else if(strncmp( Input.arg1 ,"-rotn", 5)==0){
 				RotationN(Input.arg2);
 			}
 			else{
 				printf("Correct Usage: shc -d/-e/-rotn [arguments...]\n");
 				printf("Please use 'help' for more details.\n");
-				printf("Press key to continue, or press X to quit...\n");
+				printf("Press enter to continue, or press X and enter to quit...\n");
 				PastAction("Error. Please use 'help' for more details.");
 				cont=getchar();
 				if (cont=='x'||cont=='X'){
@@ -100,30 +110,54 @@ int main ()
 			}
 		}
 
-		if(strncmp( Input.arg0 ,"import", 7)==0){
+		else if(strncmp( Input.arg0 ,"import", 6)==0){
 			int txtnum;
-			bool found;
+			char filename[15];
+			bool found = false;
 			for(int i=0; i<TEXTNUMBERS; i++){
-				if(Textlist[i]==true){
+				if(Textlist[i]==false){
 					found=true;
+					Textlist[i]=true;
 					txtnum=i;
+					break;
 				}
 			}
 			if(found == false){
-				printf("No blank file slots found. Which file slot do you wish to overwrite?");
+				printf("No blank file slots found. Which file slot do you wish to overwrite? ");
 				scanf("%d", &txtnum);
+				txtnum--;
+				Textlist[txtnum]=false;
 				resetText(&All_texts[txtnum]);
 			}
-			ImportFile(Input.arg1, txtnum, All_texts);
+			printf("Please enter a valid text file path:\n");
+			printf("Path > ");
+			scanf("%15s", filename);
+			ImportFile(filename, txtnum, All_texts);
 		}
 
-		if(strncmp( Input.arg0 ,"help", 5)==0){
+		// export??
+
+		else if(strncmp( Input.arg0 ,"help", 4)==0){
 			ProgramHelp();
 		}
 
-		if(strncmp( Input.arg0 ,"clrhistory", 11)==0){
+		else if(strncmp( Input.arg0 ,"clrhistory", 10)==0){
 			ClearPastActions();
 		}
+
+		else{
+			printf("Correct Usage: shc / import / help / clrhistory\n");
+			printf("Please use 'help' for more details.\n");
+			printf("Press enter to continue, or press X and enter to quit...\n");
+			PastAction("Error. Please use 'help' for more details.");
+
+			cont = getchar();
+			if (cont=='x'||cont=='X'){
+				exit=true;
+			}
+		}
+
+		while ((c = getchar()) != '\n' && c != EOF) { }
 
 	}
 

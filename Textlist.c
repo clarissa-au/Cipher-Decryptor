@@ -38,7 +38,7 @@ void printTextlist(){
 		printf(" ");
 		printf("%d", i+1);
 		printf("    ");
-		if(Textlist[i]==true){
+		if(Textlist[i]==true){ //true == not avaliable
 			printf("T");
 			printf("     ");
 			printf("%s\n", All_texts[i].filename);

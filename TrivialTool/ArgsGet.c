@@ -7,6 +7,7 @@
 
 #include<stdio.h>
 #include<string.h>
+#include<ctype.h>
 
 struct args{
 	char arg0[10];
@@ -19,8 +20,6 @@ struct args ArgsGet(){//returning args
 
 	int i=0, args=0, inargs=0;
 
-	int chars;
-
 	struct args Args;
 
 	char str[40];
@@ -32,7 +31,7 @@ struct args ArgsGet(){//returning args
 	}
 
 	for(i=0; i<strlen(str); i++){
-		if(str[i]!=32){
+		if(str[i]!=' '){
 			if(args==0){
 				Args.arg0[inargs]=str[i];
 			}
@@ -45,6 +44,7 @@ struct args ArgsGet(){//returning args
 			if(args==3){
 				Args.arg3[inargs]=str[i];
 			}
+			inargs++;
 		}
 		else{
 			inargs=0;

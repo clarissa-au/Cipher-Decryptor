@@ -7,7 +7,7 @@
 #include<stdio.h>
 
 void RotationN(char file[]){
-	printf("ShiftCipher");
+	printf("ShiftCipherN");
 	return;
 }
 

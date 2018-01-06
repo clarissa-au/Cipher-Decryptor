@@ -41,6 +41,7 @@ void insertText(struct Ciphertext *text, char c){
 		text->size=round(text->size*RATIO);
 		if (text->ciphertext[text->size] == 0){
 			//Print Errors, but will later tend to implementation. Break??
+			//!!! Happened
 		}
 	}
 	text->ciphertext[text->capacity]=c;

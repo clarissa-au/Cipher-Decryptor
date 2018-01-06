@@ -4,9 +4,11 @@
  *  Created on: 7 Dec 2017
  *      Author: sunnyau
  */
-#include <stdio.h>
+#include<stdio.h>
+#include<string.h>
 
 #include"CiphertextFunctions.h"
+#include"PastAction.h"
 
 struct Ciphertext{
 	int size;
@@ -22,16 +24,17 @@ void ImportFile(char filename[], int x, struct Ciphertext text[]){
 
 	FILE *ciphertextpt;
 
-	ciphertextpt = fopen(filename, "r");
-
-	if (ciphertextpt){
-    		printf("File %s exist - Importing to slot %d.",filename, (x+1));
+	if ((ciphertextpt = fopen(filename, "r"))){
+    		printf("File %s exist - Importing to slot %d.\n",filename, (x+1));
     }
     else{
-    		printf("File %s does not exist, press a key get back to the main page.",filename);
+    		printf("File %s does not exist, press a key to get back to the main page.",filename);
+    		PastAction("Import Failed.");
     		getchar();
     		return;
     }
+
+	strcpy(text[x].filename, filename);
 
 	while( !feof(ciphertextpt) ){
 		insertText(&text[x],c);
@@ -39,6 +42,12 @@ void ImportFile(char filename[], int x, struct Ciphertext text[]){
 	}
 
 	fclose(ciphertextpt);
+	PastAction("Import Succeed.");
+
+	printf("Import succeed, file stored at slot %d.\n", (x+1));
+	printf("Press enter to continue...\n");
+
+	getchar();
 
 	return;
 }

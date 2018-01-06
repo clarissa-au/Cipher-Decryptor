@@ -32,7 +32,7 @@ void PastAction(char *action){
 
 void PrintPastAction(){
 	for (int i=0; i<ActionCount; i++){
-		printf("%s", PastActionArray[i]);
+		printf("%s\n", PastActionArray[i]);
 	}
 	return;
 }

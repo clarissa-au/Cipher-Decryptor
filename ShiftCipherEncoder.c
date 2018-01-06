@@ -7,7 +7,7 @@
 #include<stdio.h>
 
 void ShiftCipherEncoder(char file[]){
-	printf("ShiftCipher");
+	printf("ShiftCipherE");
 	return;
 }
 

@@ -1,6 +1,9 @@
 #include"TrivialTool/ClearScreen.h"
 #include<stdio.h>
 #include<stdlib.h>
+#include<ctype.h>
+
+#include"PastAction.h"
 
 typedef int bool;
 #define true 1
@@ -8,8 +11,10 @@ typedef int bool;
 
 void ProgramHelp(){
 	bool exit=true;
-	char cont=' ', choice, choice2;
+	char cont=' ', choice=' ', choice2=' ';
+	char c;
 	while(exit==true){
+		while ((c = getchar()) != '\n' && c != EOF) { }
 		ClearScreen();
 		printf("Cipher-Decryptor Main Help:\n");
 		printf("Usage: [encoding] [arguments.....]\n");
@@ -20,12 +25,15 @@ void ProgramHelp(){
 		printf("[E]ncodings & associated arguments\n");
 		printf("[I]mport\n");
 		printf("E[x]port\n");
-		choice=getchar();
+
+		choice = getchar();
+
 		choice=tolower(choice);
 		switch(choice){
 		case 'e' :
+			while ((c = getchar()) != '\n' && c != EOF) { }
 			printf("View help for:");
-			printf("[S]hift Cipher(shc)");
+			printf("[S]hift Cipher(shc)\n");
 			choice2=getchar();
 			choice2=tolower(choice2);
 			switch(choice2){
@@ -33,19 +41,23 @@ void ProgramHelp(){
 				//shift cipher
 				break;
 			default:
-				printf("Error Input.");
+				printf("Error Input.\n");
 			}
 			break;
 		case 'i' :
+			while ((c = getchar()) != '\n' && c != EOF) { }
 			//import
 			break;
 		case 'x' :
+			while ((c = getchar()) != '\n' && c != EOF) { }
 			//export
 			break;
 		default:
-			printf("Error Input.");
+			while ((c = getchar()) != '\n' && c != EOF) { }
+			printf("Error Input.\n");
 		}
 		printf("Press key to continue searching for help, or press X to return to program...\n");
+		cont=getchar();
 		if (cont=='x'||cont=='X'){
 			exit=false;
 		}

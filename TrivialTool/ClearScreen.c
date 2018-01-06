@@ -8,7 +8,7 @@
 void ClearScreen(){
 	int i;
 	for(i=0; i<100; i++){
-		printf("/n");
+		printf("\n");
 	}
 	return;
 }
