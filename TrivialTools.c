@@ -84,7 +84,7 @@ void Read(char filec[]){
 	for(i=0;i<All_texts[fileint].capacity;i++){
 		printf("%c", All_texts[fileint].ciphertext[i]);
 	}
-	printf("----------\n");
+	printf("\n----------\n");
 	printf("Press enter to continue...\n");
 	getchar();
 }
@@ -102,3 +102,18 @@ void Stat(char filec[]){
 	getchar();
 }
 
+int LargestElement26(int array[26]){
+	int max=0;
+	int result=0;
+	for (int i=0; i<26;i++){
+		if (array[i]>max){
+			max=array[i];
+		}
+	}
+	for(int i=0; i<26;i++){
+		if (array[i]==max){
+			result=i;
+		}
+	}
+	return result;
+}

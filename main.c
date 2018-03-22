@@ -97,12 +97,15 @@ int main ()
 			if(istext==true){
 				if(strncmp( Input.arg1 ,"-d", 2)==0){
 					ShiftCipherDecoder(Input.arg2);
+					PastAction("Decoded Shift Cipher.");
 				}
 				else if(strncmp( Input.arg1 ,"-e", 2)==0){
 					ShiftCipherEncoder(Input.arg2, All_texts);
+					PastAction("Encoded Shift Cipher.");
 				}
 				else if(strncmp( Input.arg1 ,"-rotn", 5)==0){
 					RotationN(Input.arg2);
+					PastAction("Encoded Shift Cipher of the ROTN variant.");
 				}
 				else{
 					printf("Correct Usage: shc -d/-e/-rotn [arguments...]\n");
@@ -165,10 +168,12 @@ int main ()
 
 		else if(strncmp( Input.arg0 ,"read", 4)==0){
 			Read(Input.arg1);
+			PastAction("File read.");
 		}
 
 		else if(strncmp( Input.arg0 ,"stat", 4)==0){
 			Stat(Input.arg1);
+			PastAction("File information read.");
 		}
 
 		else{

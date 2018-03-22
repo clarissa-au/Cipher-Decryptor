@@ -14,5 +14,6 @@ struct args ArgsGet();
 void ClearScreen();
 void Read(char filec[]);
 void Stat(char filec[]);
+int LargestElement26(int array[26]);
 
 #endif /* TRIVIALTOOLS_H_ */

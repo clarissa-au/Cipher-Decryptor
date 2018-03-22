@@ -13,8 +13,6 @@
 
 #define TEXTNUMBERS 5
 
-extern struct Ciphertext All_texts[TEXTNUMBERS];
-
 void ShiftCipherEncoder(char file[], struct Ciphertext Ciphertext[]){
 	int key=0, flag0=0;
 	char filec;
