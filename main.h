@@ -15,4 +15,6 @@ struct Ciphertext{
 	char *ciphertext;
 };
 
+
+
 #endif /* MAIN_H_ */

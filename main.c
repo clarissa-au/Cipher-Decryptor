@@ -11,8 +11,7 @@
 
 #include"main.h"
 
-#include"TrivialTool/ClearScreen.h"
-#include"TrivialTool/ArgsGet.h"
+#include"TrivialTools.h"
 
 #include"ProgramHelp.h"
 #include"Textlist.h"
@@ -42,7 +41,6 @@ char PastActionArray[PASTACTIONSTORED][ACTIONLENGTH]; //global char array
 int ActionCount=0;
 
 #define CIPHERTEXT_INIT_SPACE 100
-
 #define TEXTNUMBERS 5
 
 struct Ciphertext All_texts[TEXTNUMBERS];
@@ -54,7 +52,9 @@ int main ()
 	bool exit=false;
 	char cont=' ';
 
-	char key[100],c;
+	char c;
+
+	int key[100];
 
 	struct args Input;
 
@@ -88,21 +88,37 @@ int main ()
 		Input = ArgsGet(); //getting args for prg
 
 		if(strncmp( Input.arg0 ,"shc", 3)==0){
-			//require imported files?
-			if(strncmp( Input.arg1 ,"-d", 2)==0){
-				ShiftCipherDecoder(Input.arg2);
+			bool istext=false;
+			for(int i=0; i<TEXTNUMBERS; i++){
+				if(Textlist[i]==true){
+					istext=true;
+				}
 			}
-			else if(strncmp( Input.arg1 ,"-e", 2)==0){
-				ShiftCipherEncoder(Input.arg2);
-			}
-			else if(strncmp( Input.arg1 ,"-rotn", 5)==0){
-				RotationN(Input.arg2);
+			if(istext==true){
+				if(strncmp( Input.arg1 ,"-d", 2)==0){
+					ShiftCipherDecoder(Input.arg2);
+				}
+				else if(strncmp( Input.arg1 ,"-e", 2)==0){
+					ShiftCipherEncoder(Input.arg2, All_texts);
+				}
+				else if(strncmp( Input.arg1 ,"-rotn", 5)==0){
+					RotationN(Input.arg2);
+				}
+				else{
+					printf("Correct Usage: shc -d/-e/-rotn [arguments...]\n");
+					printf("Please use 'help' for more details.\n");
+					printf("Press enter to continue, or press X and enter to quit...\n");
+					PastAction("Error. Please use 'help' for more details.");
+					cont=getchar();
+					if (cont=='x'||cont=='X'){
+						exit=true;
+					}
+				}
 			}
 			else{
-				printf("Correct Usage: shc -d/-e/-rotn [arguments...]\n");
-				printf("Please use 'help' for more details.\n");
+				printf("Please import a file before you proceed.\n");
+				PastAction("Error. Please import file.");
 				printf("Press enter to continue, or press X and enter to quit...\n");
-				PastAction("Error. Please use 'help' for more details.");
 				cont=getchar();
 				if (cont=='x'||cont=='X'){
 					exit=true;
@@ -123,7 +139,8 @@ int main ()
 				}
 			}
 			if(found == false){
-				printf("No blank file slots found. Which file slot do you wish to overwrite? ");
+				printf("No blank file slots found. Which file slot do you wish to overwrite?\n");
+				printf("Slot > ");
 				scanf("%d", &txtnum);
 				txtnum--;
 				Textlist[txtnum]=false;
@@ -132,6 +149,7 @@ int main ()
 			printf("Please enter a valid text file path:\n");
 			printf("Path > ");
 			scanf("%15s", filename);
+			initText(&All_texts[txtnum]);
 			ImportFile(filename, txtnum, All_texts);
 		}
 
@@ -145,8 +163,16 @@ int main ()
 			ClearPastActions();
 		}
 
+		else if(strncmp( Input.arg0 ,"read", 4)==0){
+			Read(Input.arg1);
+		}
+
+		else if(strncmp( Input.arg0 ,"stat", 4)==0){
+			Stat(Input.arg1);
+		}
+
 		else{
-			printf("Correct Usage: shc / import / help / clrhistory\n");
+			printf("Correct Usage: shc / import / help / clrhistory / read\n");
 			printf("Please use 'help' for more details.\n");
 			printf("Press enter to continue, or press X and enter to quit...\n");
 			PastAction("Error. Please use 'help' for more details.");

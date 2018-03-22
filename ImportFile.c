@@ -30,6 +30,7 @@ void ImportFile(char filename[], int x, struct Ciphertext text[]){
     else{
     		printf("File %s does not exist, press a key to get back to the main page.",filename);
     		PastAction("Import Failed.");
+    		//reset text list!! NEED WORK
     		getchar();
     		return;
     }

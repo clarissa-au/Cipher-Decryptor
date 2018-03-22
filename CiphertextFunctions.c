@@ -27,25 +27,38 @@ int initText(struct Ciphertext *text){
 	text->size=CIPHERTEXT_INIT_SPACE;
 	text->capacity=0;
 	text->ciphertext=calloc(CIPHERTEXT_INIT_SPACE, sizeof(char));
-	if (text->ciphertext[CIPHERTEXT_INIT_SPACE] == 0){
-		//Print Errors, but will later tend to implementation.
-		return -1;
+	if (text->ciphertext[CIPHERTEXT_INIT_SPACE] != NULL){
+		//Print succeed, later tend to implementation.
+		return 0;
 	}
-	//Print succeed, later tend to implementation.
-	return 0;
+	//printf("Filesize: %d\n", text->capacity);
+	//printf("Max Filesize: %d\n", text->size);
+	//printf("Name: %s\n", text->filename);
+	//Print Errors, but will later tend to implementation.
+	return -1;
 }
 
+//text capacity is current standing,
+//text size is the max no of chars.
 void insertText(struct Ciphertext *text, char c){
 	if (text->capacity == text->size){
 		text->ciphertext= realloc(text->ciphertext, round(text->size*RATIO));
 		text->size=round(text->size*RATIO);
-		if (text->ciphertext[text->size] == 0){
+		if (text->ciphertext[text->size] != NULL){
+
+		}
+		else{
 			//Print Errors, but will later tend to implementation. Break??
 			//!!! Happened
 		}
 	}
 	text->ciphertext[text->capacity]=c;
 	text->capacity++;
+	//printf("Filesize: %d\n", text->capacity);
+	//printf("Max Filesize: %d\n", text->size);
+	//printf("Name: %s\n", text->filename);
+	//printf("Should Insert Text: %c\n", c);
+	//printf("Inserted Text: %c\n", text->ciphertext[(text->capacity-1)]);
 	return;
 }
 

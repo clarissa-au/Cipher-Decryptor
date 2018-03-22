@@ -1,4 +1,4 @@
-#include"TrivialTool/ClearScreen.h"
+#include"TrivialTools.h"
 #include<stdio.h>
 #include<stdlib.h>
 #include<ctype.h>

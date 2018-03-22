@@ -8,6 +8,6 @@
 #ifndef SHIFTCIPHERENCODER_H_
 #define SHIFTCIPHERENCODER_H_
 
-void ShiftCipherEncoder(char file[]);
+void ShiftCipherEncoder(char file[], struct Ciphertext Ciphertext[]);
 
 #endif /* SHIFTCIPHERENCODER_H_ */
