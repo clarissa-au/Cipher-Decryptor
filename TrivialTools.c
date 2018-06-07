@@ -78,7 +78,12 @@ void Read(char filec[]){
 	char file=filec[0];
 	int fileint=file-49;
 	int i;
-	//range check + reenter
+	while((fileint > 4) || (fileint < 0)){
+		printf("Invalid Input, please reenter your choice.\n");
+		printf("File Number > ");
+		scanf("%d", &fileint);
+		fileint = fileint - 1;
+	}
 	printf("Reading text %d, with %d characters.\n", (fileint+1), All_texts[fileint].capacity);
 	printf("----------\n");
 	for(i=0;i<All_texts[fileint].capacity;i++){
@@ -92,7 +97,12 @@ void Read(char filec[]){
 void Stat(char filec[]){
 	char file=filec[0];
 	int fileint=file-49;
-	//range check + reenter
+	while((fileint > 4) || (fileint < 0)){
+		printf("Invalid Input, please reenter your choice.\n");
+		printf("File Number > ");
+		scanf("%d", &fileint);
+		fileint = fileint - 1;
+	}
 	printf("\n File %d\n---------- \n", (fileint+1));
 	printf("Filesize: %d\n", All_texts[fileint].capacity);
 	printf("Current Maximum Filesize: %d\n", All_texts[fileint].size);

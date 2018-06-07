@@ -11,7 +11,7 @@ typedef int bool;
 
 void ProgramHelp(){
 	bool exit=true;
-	char cont=' ', choice=' ', choice2=' ';
+	char cont=' ', choice=' ', choice2=' ' ,choice3=' ';
 	char c;
 	while(exit==true){
 		while ((c = getchar()) != '\n' && c != EOF) { }
@@ -38,7 +38,28 @@ void ProgramHelp(){
 			choice2=tolower(choice2);
 			switch(choice2){
 			case 's':
-				//shift cipher
+				while ((c = getchar()) != '\n' && c != EOF) { }
+				printf("View help for:");
+				printf("[E]ncoding\n");
+				printf("[D]ecoding\n");
+				printf("[R]OT13\n");
+				choice3=getchar();
+				choice3=tolower(choice2);
+				switch(choice3){
+				case 'e':
+					printf("Command: shc -e [TEXTNUMBER] \n");
+					printf("Prerequistics: You have to import a file first. \n");
+					break;
+				case 'd':
+					printf("Command: shc -d [TEXTNUMBER] \n");
+					printf("Prerequistics: You have to import a file first. \n");
+					break;
+				case 'r':
+					printf("Command: shc -r [TEXTNUMBER] \n");
+					printf("Prerequistics: You have to import a file first. \n");
+					printf("Note: Work in Progress. \n");//TODO
+					break;
+				}
 				break;
 			default:
 				printf("Error Input.\n");
@@ -46,7 +67,8 @@ void ProgramHelp(){
 			break;
 		case 'i' :
 			while ((c = getchar()) != '\n' && c != EOF) { }
-			//import
+			printf("Command: import \n");
+			printf("You will have to place the .txt file in the main user folder.");
 			break;
 		case 'x' :
 			while ((c = getchar()) != '\n' && c != EOF) { }

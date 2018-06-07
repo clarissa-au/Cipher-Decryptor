@@ -8,6 +8,6 @@
 #ifndef IMPORTFILE_H_
 #define IMPORTFILE_H_
 
-void ImportFile(char filename[], int x, struct Ciphertext text[]);
+int ImportFile(char filename[], int x, struct Ciphertext text[]);
 
 #endif /* IMPORTFILE_H_ */

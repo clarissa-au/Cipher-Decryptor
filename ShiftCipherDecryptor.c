@@ -17,7 +17,7 @@ void ShiftCipherDecoder(char file[]){
 	int maxelem;
 	int key;
 	int rvkey;
-	while((filec-49)<0||(filec-49)>TEXTNUMBERS){
+	while((filec-49)<0||(filec-49)>(TEXTNUMBERS-1)){
 		char c;
 		while ((c = getchar()) != '\n' && c != EOF) { }
 		printf("You have entered an invalid text reference number.\n");

@@ -8,6 +8,6 @@
 #ifndef ROTATIONN_H_
 #define ROTATIONN_H_
 
-void RotationN(char file[]);
+void RotationN(char file[], int type);
 
 #endif /* ROTATIONN_H_ */

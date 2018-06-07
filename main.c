@@ -12,14 +12,16 @@
 #include"main.h"
 
 #include"TrivialTools.h"
+#include"PastAction.h"
+
+#include"ImportFile.h"
+#include"ExportFile.h"
 
 #include"ProgramHelp.h"
 #include"Textlist.h"
-#include"ShiftCipherDecryptor.h"
-#include"ImportFile.h"
-#include"PastAction.h"
-#include"CiphertextFunctions.h"
 
+#include"ShiftCipherDecryptor.h"
+#include"CiphertextFunctions.h"
 #include"ShiftCipherDecryptor.h"
 #include"ShiftCipherEncoder.h"
 #include"RotationN.h"
@@ -59,7 +61,7 @@ int main ()
 	struct args Input;
 
 	for(int i=0; i<TEXTNUMBERS; i++){
-		Textlist[i]=false; //true == not avaliable
+		Textlist[i]=false; //true == not avaliable, or used.
 	}
 
 	while(exit==false){
@@ -104,8 +106,35 @@ int main ()
 					PastAction("Encoded Shift Cipher.");
 				}
 				else if(strncmp( Input.arg1 ,"-rotn", 5)==0){
-					RotationN(Input.arg2);
-					PastAction("Encoded Shift Cipher of the ROTN variant.");
+					printf("ROTN Ciphers are as secure as Shift Ciphers.\n");
+					printf("Use with caution.\n");
+					int type , chosen = 0;
+					while(chosen == 0){
+						//type 1 = ROT5
+						//type 2 = ROT13
+						//type 3 = ROT47
+						if(strncmp( Input.arg3 ,"-5", 2)==0){
+							chosen = 1;
+							type = 1;
+						}
+						if(strncmp( Input.arg3 ,"-13", 3)==0){
+							chosen = 1;
+							type = 2;
+						}
+						if(strncmp( Input.arg3 ,"-47", 3)==0){
+							chosen = 1;
+							type = 3;
+						}
+						if(chosen == 0){
+							printf("You have entered an invalid ROT encryption argument.\n");
+							printf("Please reenter the specific argument for ROT encryption.\n");
+							printf("Valid argument: -5 / -13 / -47 \n");
+							printf("ROT encryption argument > ");
+							scanf("%10s", Input.arg3);
+						}
+					}
+					RotationN(Input.arg2, type);
+					PastAction("Encoded/Decoded Shift Cipher of the ROTN variant.");
 				}
 				else{
 					printf("Correct Usage: shc -d/-e/-rotn [arguments...]\n");
@@ -153,10 +182,17 @@ int main ()
 			printf("Path > ");
 			scanf("%15s", filename);
 			initText(&All_texts[txtnum]);
-			ImportFile(filename, txtnum, All_texts);
+			int flag_successful;
+			flag_successful = ImportFile(filename, txtnum, All_texts);
+			if(flag_successful == 1){
+				Textlist[txtnum] = false;
+			}
 		}
 
-		// export??
+		else if(strncmp( Input.arg0 ,"export", 6)==0){
+			ExportFile(Input.arg1, All_texts);
+			PastAction("File exported.");
+		}
 
 		else if(strncmp( Input.arg0 ,"help", 4)==0){
 			ProgramHelp();
@@ -177,7 +213,7 @@ int main ()
 		}
 
 		else{
-			printf("Correct Usage: shc / import / help / clrhistory / read\n");
+			printf("Correct Usage: shc / import / help / clrhistory / read / stat\n");
 			printf("Please use 'help' for more details.\n");
 			printf("Press enter to continue, or press X and enter to quit...\n");
 			PastAction("Error. Please use 'help' for more details.");

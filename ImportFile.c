@@ -18,7 +18,8 @@ struct Ciphertext{
 };
 #define CIPHERTEXT_INIT_SPACE 100
 
-void ImportFile(char filename[], int x, struct Ciphertext text[]){
+
+int ImportFile(char filename[], int x, struct Ciphertext text[]){
 
 	char c;
 
@@ -30,9 +31,8 @@ void ImportFile(char filename[], int x, struct Ciphertext text[]){
     else{
     		printf("File %s does not exist, press a key to get back to the main page.",filename);
     		PastAction("Import Failed.");
-    		//reset text list!! NEED WORK
     		getchar();
-    		return;
+    		return 1;
     }
 
 	strcpy(text[x].filename, filename);
@@ -50,6 +50,6 @@ void ImportFile(char filename[], int x, struct Ciphertext text[]){
 
 	getchar();
 
-	return;
+	return 0;
 }
 
