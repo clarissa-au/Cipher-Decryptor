@@ -127,3 +127,37 @@ int LargestElement26(int array[26]){
 	}
 	return result;
 }
+
+void Swap(int *xp, int *yp){
+    int temp = *xp;
+    *xp = *yp;
+    *yp = temp;
+}
+
+void BubbleSort(int arr[], int n){
+   int i;
+   int j;
+   for (i = 0; i < n-1; i++){
+       for (j = 0; j < n-i-1; j++){
+           if (arr[j] > arr[j+1]){
+              Swap(&arr[j], &arr[j+1]);
+           }
+       }
+   }
+}
+
+int Element26(int array[26], int place){
+	place --;
+	int comparativearray[26];
+	int result=0;
+	for (int i=0; i<26;i++){
+		comparativearray[i]=array[i];
+	}
+	BubbleSort(comparativearray, 26);
+	for(int i=0; i<26;i++){
+		if (array[i]==comparativearray[place-1]){
+			result=i;
+		}
+	}
+	return result;
+}

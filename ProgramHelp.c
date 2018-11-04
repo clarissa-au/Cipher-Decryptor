@@ -25,6 +25,7 @@ void ProgramHelp(){
 		printf("[E]ncodings & associated arguments\n");
 		printf("[I]mport\n");
 		printf("E[x]port\n");
+		printf("[M]iscellaneous\n");
 
 		choice = getchar();
 
@@ -57,7 +58,6 @@ void ProgramHelp(){
 				case 'r':
 					printf("Command: shc -r [TEXTNUMBER] \n");
 					printf("Prerequistics: You have to import a file first. \n");
-					printf("Note: Work in Progress. \n");//TODO
 					break;
 				}
 				break;
@@ -72,7 +72,13 @@ void ProgramHelp(){
 			break;
 		case 'x' :
 			while ((c = getchar()) != '\n' && c != EOF) { }
-			//export
+			printf("Command: export \n");
+			break;
+		case 'm' :
+			while ((c = getchar()) != '\n' && c != EOF) { }
+			printf("read [text number] - to read the specified text \n");
+			printf("stat [text number] - print the relevant statistics about the specified text \n");
+			printf("fprint [text number] - to output the character fingerprint of the specified text \n");
 			break;
 		default:
 			while ((c = getchar()) != '\n' && c != EOF) { }

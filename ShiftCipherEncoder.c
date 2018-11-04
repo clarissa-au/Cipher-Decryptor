@@ -5,7 +5,8 @@
  *      Author: sunnyau
  */
 #include<stdio.h>
-#include <stdlib.h>
+#include<stdlib.h>
+#include <time.h>
 #include"main.h"
 
 #include"CiphertextFunctions.h"
@@ -15,12 +16,14 @@
 
 void ShiftCipherEncoder(char file[], struct Ciphertext Ciphertext[]){
 	int key=0, flag0=0;
+	srand(time(0));
 	char filec;
 
 	printf("Please enter a key for Shift Cipher Encryption.\n");
 	printf("For a random key, please input 0.\n");
 	printf("Key > ");
 	scanf("%d", &key);
+
 
 	if(key==0){
 		key = rand() % 26; //TODO RANDOM

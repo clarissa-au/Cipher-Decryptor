@@ -8,6 +8,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<ctype.h>
 
 #include"main.h"
 
@@ -47,16 +48,18 @@ int ActionCount=0;
 
 struct Ciphertext All_texts[TEXTNUMBERS];
 
+
+char Dictionary[10000][25];
+
 bool Textlist[TEXTNUMBERS];
 
 int main ()
 {
 	bool exit=false;
 	char cont=' ';
+	Dictionary[0][0] = 'z';
 
 	char c;
-
-	int key[100];
 
 	struct args Input;
 
@@ -86,6 +89,14 @@ int main ()
 		printf("\n");
 		printf("\n");
 		printTextlist();
+		printf("\n");
+		printf("\n");
+		if(Dictionary[0][0] == 'z'){
+			printf("Dictionary does not exists.\n\n");
+		}
+		else{
+			printf("Dictionary exists.\n\n");
+		}
 
 		Input = ArgsGet(); //getting args for prg
 
@@ -159,39 +170,96 @@ int main ()
 		}
 
 		else if(strncmp( Input.arg0 ,"import", 6)==0){
-			int txtnum;
 			char filename[15];
-			bool found = false;
-			for(int i=0; i<TEXTNUMBERS; i++){
-				if(Textlist[i]==false){
-					found=true;
-					Textlist[i]=true;
-					txtnum=i;
-					break;
+			if (strncmp( Input.arg1 ,"-d", 2)==0){
+				printf("Imports a 10000-word sorted dictionary.\n");
+				printf("Please enter a valid text file path:\n");
+				printf("Path > ");
+				scanf("%15s", filename);
+				FILE *dictpt;
+				if ((dictpt = fopen(filename, "r"))){
+			    		printf("File %s exist - Importing.\n",filename);
+			    		int i = 0, j = 0;
+			    		while( !feof(dictpt) ){
+			    			//Dictionary[10000][25]
+			    			c = fgetc(dictpt);
+			    			if (c == '\n'){
+			    				j = 0;
+			    				i++;
+			    				printf("\r %d %%", i/100);
+			    			}
+			    			else if(isprint(c) == 0){
+
+			    			}
+			    			else{
+			    				Dictionary[i][j] = c;
+			    				j++;
+			    			}
+			    		}
+			    		printf("\r Completed.");
+			    		printf("\n");
+			    		printf("Press enter to continue...\n");
+			    		cont = getchar();
+			    		PastAction("Import Succeed.");
+			    }
+			    else{
+			    		printf("File %s does not exist, press a key to get back to the main page.",filename);
+			    		PastAction("Import Failed.");
+			    		getchar();
+			    }
+			}
+			else{
+				int txtnum;
+				bool found = false;
+				for(int i=0; i<TEXTNUMBERS; i++){
+					if(Textlist[i]==false){
+						found=true;
+						Textlist[i]=true;
+						txtnum=i;
+						break;
+					}
 				}
-			}
-			if(found == false){
-				printf("No blank file slots found. Which file slot do you wish to overwrite?\n");
-				printf("Slot > ");
-				scanf("%d", &txtnum);
-				txtnum--;
-				Textlist[txtnum]=false;
-				resetText(&All_texts[txtnum]);
-			}
-			printf("Please enter a valid text file path:\n");
-			printf("Path > ");
-			scanf("%15s", filename);
-			initText(&All_texts[txtnum]);
-			int flag_successful;
-			flag_successful = ImportFile(filename, txtnum, All_texts);
-			if(flag_successful == 1){
-				Textlist[txtnum] = false;
+				if(found == false){
+					printf("No blank file slots found. Which file slot do you wish to overwrite?\n");
+					printf("Slot > ");
+					scanf("%d", &txtnum);
+					txtnum--;
+					Textlist[txtnum]=false;
+					resetText(&All_texts[txtnum]);
+				}
+				printf("Please enter a valid text file path:\n");
+				printf("Path > ");
+				scanf("%15s", filename);
+				initText(&All_texts[txtnum]);
+				int flag_successful;
+				flag_successful = ImportFile(filename, txtnum, All_texts);
+				if(flag_successful == 1){
+					Textlist[txtnum] = false;
+				}
 			}
 		}
 
 		else if(strncmp( Input.arg0 ,"export", 6)==0){
 			ExportFile(Input.arg1, All_texts);
 			PastAction("File exported.");
+		}
+
+		else if(strncmp( Input.arg0 ,"pdict", 5)==0){
+			if(Dictionary[0][0] == 'z'){
+				printf("Dictionary does not exists.\n");
+				printf("Operation Failed.\n");
+				PastAction("Operation Failed.");
+	    			printf("Press enter to continue...\n");
+	    			cont = getchar();
+			}
+			else{
+				for(int i=0;i<10000;i++){
+					printf("Dictionary[%d] = %s \n",i, Dictionary[i]);
+				}
+				PastAction("Operation done.");
+	    			printf("Press enter to continue...\n");
+	    			cont = getchar();
+			}
 		}
 
 		else if(strncmp( Input.arg0 ,"help", 4)==0){
@@ -209,6 +277,11 @@ int main ()
 
 		else if(strncmp( Input.arg0 ,"stat", 4)==0){
 			Stat(Input.arg1);
+			PastAction("File information read.");
+		}
+
+		else if(strncmp( Input.arg0 ,"fprint", 6)==0){
+			//TODO fprint
 			PastAction("File information read.");
 		}
 
