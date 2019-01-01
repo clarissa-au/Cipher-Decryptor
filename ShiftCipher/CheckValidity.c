@@ -33,6 +33,7 @@ int CheckValidity(char SampleText[][25], int num){
 		low = 0;
 		while (hi > low+1 && search == 0){
 			mid = (hi+low)/2;
+      printf("%s %s\n", SampleText[m], Dictionary[mid]);
 			if (strcmp(SampleText[m],Dictionary[mid])>0){
 				low = mid;
 			}
@@ -45,6 +46,7 @@ int CheckValidity(char SampleText[][25], int num){
 			}
 		}
 	}
+  //printf("%d\n", correct*100/tested);
 	if(correct*100/tested > 70){
 		return 1;
 	}

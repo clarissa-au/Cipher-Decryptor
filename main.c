@@ -27,6 +27,8 @@
 #include"ShiftCipherEncoder.h"
 #include"RotationN.h"
 
+#include"ShiftCipher/CharacterFunnel.h"
+
 typedef int bool;
 #define true 1
 #define false 0
@@ -42,6 +44,7 @@ struct args{
 #define ACTIONLENGTH 50
 char PastActionArray[PASTACTIONSTORED][ACTIONLENGTH]; //global char array
 int ActionCount=0;
+int characterlist[26];
 
 #define CIPHERTEXT_INIT_SPACE 100
 #define TEXTNUMBERS 5
@@ -257,8 +260,8 @@ int main ()
 					printf("Dictionary[%d] = %s \n",i, Dictionary[i]);
 				}
 				PastAction("Operation done.");
-	    			printf("Press enter to continue...\n");
-	    			cont = getchar();
+	    		printf("Press enter to continue...\n");
+	    		cont = getchar();
 			}
 		}
 
@@ -281,8 +284,31 @@ int main ()
 		}
 
 		else if(strncmp( Input.arg0 ,"fprint", 6)==0){
-			//TODO fprint
-			PastAction("File information read.");
+			char file=Input.arg1[0];
+			int fileint=file-49;
+			while((fileint > 4) || (fileint < 0)){
+				printf("Invalid Input, please reenter your choice.\n");
+				printf("File Number > ");
+				scanf("%d", &fileint);
+				fileint = fileint - 1;
+			}
+			printf("Printing frequency analysis of text %d:\n", fileint+1);
+			CharacterFunnel(file);
+			int max = LargestElement26(characterlist);
+			max = characterlist[max];
+			for(int loop=0; loop<26; loop++){
+				printf("%c|", loop+65);
+				printf("%4d|", characterlist[loop]);
+				int percent;
+				for(percent = characterlist[loop] * 100 / max; percent > 0 ;percent = percent - 5 ){
+					printf("*");
+				}
+				printf("\n");
+			}
+			PastAction("Operation done.");
+	    	printf("Press enter to continue...\n");
+	    	cont = getchar();
+			PastAction("File frequency analysis read.");
 		}
 
 		else{

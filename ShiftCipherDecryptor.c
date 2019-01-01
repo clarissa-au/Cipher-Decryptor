@@ -16,7 +16,8 @@ extern struct Ciphertext All_texts[TEXTNUMBERS];
 #include"main.h"
 
 #define TEXTNUMBERS 5
-int characterlist[26];
+extern int characterlist[26];
+
 
 void ShiftCipherDecoder(char file[]){
 	char filec=file[0];
@@ -69,17 +70,24 @@ void ShiftCipherDecoder(char file[]){
 		int resolve = 0;
 		int currentelem = 0;
 		while(solved == 0 && cases <= 26){
-			currentelem = Element26(characterlist, cases);
+      //Type 1:
+			//currentelem = Element26(characterlist, cases);
+      //printf("%d\n", currentelem);
+      //printf("%d\n", cases);
+      //Type 2:
+      currentelem = cases;
+      //EndType:
 			key = currentelem-4;
 			if(key<0){
 				key=key+26;
 			}
 			rvkey = 26-key;
+      //printf("%d\n", rvkey);
 			FixedSpaceTranslator(rvkey, filec);
 			char SampleText[1000][25];
 			int text;
 			text = (filec-49);
-			int j=0, i=0, k=0;
+			int j=0, i=1, k=0;
 			while(i<=All_texts[text].capacity && j<1000){
 				//Dictionary[10000][25]
 				c = All_texts[text].ciphertext[i];
@@ -101,8 +109,8 @@ void ShiftCipherDecoder(char file[]){
 			else{
 				FixedSpaceTranslator(key, filec);
 			}
-			cases++;
 			printf("\r%d/26", cases);
+      cases++;
 		}
 		printf("\rComplete.");
 		printf("\n");

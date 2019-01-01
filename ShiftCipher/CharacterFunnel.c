@@ -11,6 +11,9 @@
 extern struct Ciphertext All_texts[TEXTNUMBERS];
 extern int characterlist[26];
 void CharacterFunnel(char textchar){
+	for(int n=0;n<26;n++){
+		characterlist[n] = 0;
+	}
 	int text,i=0;
 	char c;
 	text = (textchar-49);

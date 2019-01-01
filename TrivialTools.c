@@ -146,16 +146,16 @@ void BubbleSort(int arr[], int n){
    }
 }
 
-int Element26(int array[26], int place){
+int Element26(int basearray[26], int place){
 	place --;
 	int comparativearray[26];
 	int result=0;
 	for (int i=0; i<26;i++){
-		comparativearray[i]=array[i];
+		comparativearray[i]=basearray[i];
 	}
 	BubbleSort(comparativearray, 26);
 	for(int i=0; i<26;i++){
-		if (array[i]==comparativearray[place-1]){
+		if (basearray[i]==comparativearray[place]){
 			result=i;
 		}
 	}

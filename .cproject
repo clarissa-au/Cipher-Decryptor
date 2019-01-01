@@ -42,6 +42,12 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<fileInfo id="cdt.managedbuild.config.gnu.cross.exe.debug.829381741.357145507" name="main.c" rcbsApplicability="disable" resourcePath="main.c" toolsToInvoke="cdt.managedbuild.tool.gnu.cross.c.compiler.394440131.1014406923">
+						<tool id="cdt.managedbuild.tool.gnu.cross.c.compiler.394440131.1014406923" name="Cross GCC Compiler" superClass="cdt.managedbuild.tool.gnu.cross.c.compiler.394440131">
+							<option id="gnu.c.compiler.option.dialect.std.1714251522" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="true" value="gnu.c.compiler.dialect.c99" valueType="enumerated"/>
+							<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.521398051" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
+						</tool>
+					</fileInfo>
 					<sourceEntries>
 						<entry excluding="ShiftCipher|TrivialTool" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="ShiftCipher"/>
